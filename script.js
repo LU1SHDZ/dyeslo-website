@@ -17,6 +17,38 @@ document.querySelectorAll('.product-image').forEach((image) => {
   }
 });
 
+document.querySelectorAll('.product-info strong').forEach((price) => {
+  if (price.textContent.trim().startsWith('$')) price.textContent = 'Details soon';
+});
+
+const productSummary = document.querySelector('.product-summary');
+if (productSummary) {
+  document.title = "Living Bottle Planter — D'Yeslo";
+  const description = document.querySelector('meta[name="description"]');
+  if (description) description.content = "Preview a one-of-a-kind reclaimed glass bottle planter handmade by D'Yeslo in Athens, Georgia.";
+  const breadcrumb = document.querySelector('.breadcrumb');
+  if (breadcrumb) breadcrumb.lastChild.textContent = ' / Living Bottle Planter';
+  productSummary.querySelector('h1').innerHTML = 'Living Bottle<br><em>Planter</em>';
+  productSummary.querySelector('.price').textContent = 'One of one · Details coming soon';
+  productSummary.querySelector('.product-intro').textContent = "A reclaimed bottle transformed into a living vessel—an expressive meeting of glass, greenery, and D'Yeslo's handmade point of view.";
+  productSummary.querySelector('.product-options').hidden = true;
+  productSummary.querySelector('.shipping-note').textContent = 'See current availability at the Wednesday or Saturday market.';
+  const detailCopy = productSummary.querySelectorAll('details p');
+  if (detailCopy[0]) detailCopy[0].textContent = "Made by hand in Athens from reclaimed glass. Natural variations and traces of the bottle's former life make every piece unique.";
+  if (detailCopy[1]) detailCopy[1].textContent = 'Exact dimensions and plant-care guidance will be listed with each available piece.';
+  if (detailCopy[2]) detailCopy[2].textContent = 'Every D\'Yeslo piece extends the useful life of materials that might otherwise be discarded.';
+}
+
+const productStory = document.querySelector('.product-story');
+if (productStory) {
+  productStory.querySelector('h2').innerHTML = 'Once overlooked,<br>now <em>living art.</em>';
+  productStory.querySelector(':scope > p').textContent = "This piece begins with recovered glass and becomes part sculpture, part plant home. Its previous life is not erased—it is what gives the finished work its character.";
+}
+
+document.querySelectorAll('footer span').forEach((text) => {
+  if (text.textContent.includes('Hudson Valley')) text.textContent = 'Handmade in Athens, GA';
+});
+
 const menuToggle = document.querySelector('.menu-toggle');
 const siteHeader = document.querySelector('.site-header');
 const mainNav = document.querySelector('.desktop-nav');
@@ -41,10 +73,9 @@ document.querySelectorAll('.desktop-nav a').forEach((link) => {
 });
 
 document.querySelectorAll('.add-cart').forEach((button) => {
-  button.innerHTML = "Ask about this piece <span>↗</span>";
+  button.innerHTML = "Ask on Instagram <span>↗</span>";
   button.addEventListener('click', () => {
-    const piece = document.querySelector('.product-summary h1, .drawer-content h2')?.textContent.trim() || "a D'Yeslo piece";
-    window.open(`https://wa.me/17067148017?text=${encodeURIComponent(`Hi D'Yeslo, I'm interested in ${piece}. Is it available?`)}`, '_blank', 'noopener');
+    window.open('https://www.instagram.com/d_yeslo/', '_blank', 'noopener');
   });
 });
 
