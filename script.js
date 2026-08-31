@@ -5,6 +5,16 @@ const importedProducts = [
   { key: 'muertos', name: 'Los Muertos Lamp', type: 'Illustrated bottle · functional art', image: 'assets/images/imported/los-muertos.png' },
 ];
 
+const collectionControls = document.querySelector('.shop-controls');
+if (collectionControls) {
+  const count = collectionControls.querySelector(':scope > span');
+  if (count) count.textContent = 'Current studio preview';
+  const labels = ['All', 'Bottle art', 'Living décor', 'Wearable art'];
+  collectionControls.querySelectorAll(':scope > div button').forEach((button, index) => {
+    if (labels[index]) button.textContent = labels[index];
+  });
+}
+
 document.querySelectorAll('.listing .product-card').forEach((card, index) => {
   const product = importedProducts[index % importedProducts.length];
   const link = card.querySelector('a');
