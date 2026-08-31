@@ -2,11 +2,13 @@
 
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from threading import Thread
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent
-HOST = "127.0.0.1"
+HOSTS = ("127.0.0.1", "192.168.1.20")
 PORT = 4173
+PREVIEW_VERSION = "9fac6eb"
 
 
 class PreviewHandler(SimpleHTTPRequestHandler):
@@ -19,8 +21,19 @@ class PreviewHandler(SimpleHTTPRequestHandler):
         self.send_header("Expires", "0")
         super().end_headers()
 
+    def do_GET(self):
+        if self.path in {"", "/", "/index.html"}:
+            self.send_response(302)
+            self.send_header("Location", f"/index.html?version={PREVIEW_VERSION}")
+            self.end_headers()
+            return
+        super().do_GET()
+
 
 if __name__ == "__main__":
-    print(f"D'Yeslo preview: http://{HOST}:{PORT}/")
     print(f"Serving: {PROJECT_ROOT}")
-    ThreadingHTTPServer((HOST, PORT), PreviewHandler).serve_forever()
+    servers = [ThreadingHTTPServer((host, PORT), PreviewHandler) for host in HOSTS]
+    for host, server in zip(HOSTS, servers):
+        print(f"D'Yeslo preview: http://{host}:{PORT}/")
+        Thread(target=server.serve_forever, daemon=True).start()
+    servers[0].serve_forever()
