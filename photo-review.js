@@ -1,17 +1,17 @@
 const reviewDefaults = {
-  hero: { key: 'market', label: 'Market display', image: 'assets/images/instagram/market-display.jpg' },
-  about: { key: 'portrait', label: 'Artist portrait', image: 'assets/images/instagram/artist-portrait.jpg' },
+  hero: { key: 'imported-display', label: 'Imported display', image: 'assets/images/imported/display.png' },
+  about: { key: 'imported-yesi', label: 'Yesi portrait', image: 'assets/images/imported/yesi.png' },
   products: [
-    { key: 'planter', label: 'Bottle planter', image: 'assets/images/instagram/upcycled-planter.jpg' },
-    { key: 'lamp', label: 'Bottle lamp', image: 'assets/images/instagram/bottle-lamp.jpg' },
-    { key: 'mini', label: 'Mini originals', image: 'assets/images/instagram/mini-art.jpg' },
-    { key: 'glass', label: 'Glass study', image: 'assets/images/instagram/reclaimed-bottles.jpg' }
+    { key: 'imported-bag', label: 'Patchwork bag', image: 'assets/images/imported/bag.png' },
+    { key: 'imported-bottle', label: 'Suspended bottle', image: 'assets/images/imported/bottle.png' },
+    { key: 'imported-lamp', label: 'Botanical lamp', image: 'assets/images/imported/lamp.png' },
+    { key: 'imported-muertos', label: 'Los Muertos lamp', image: 'assets/images/imported/los-muertos.png' }
   ]
 };
 
 let reviewChoices;
 try {
-  reviewChoices = JSON.parse(localStorage.getItem('dyeslo-photo-review')) || reviewDefaults;
+  reviewChoices = JSON.parse(localStorage.getItem('dyeslo-photo-review-v2')) || reviewDefaults;
 } catch {
   reviewChoices = reviewDefaults;
 }
@@ -34,7 +34,7 @@ function renderReview() {
   });
 
   document.getElementById('selection-summary').textContent = `Hero: ${reviewChoices.hero.label} · About: ${reviewChoices.about.label} · Products: ${reviewChoices.products.map((item) => item.label).join(', ') || 'None selected'}`;
-  localStorage.setItem('dyeslo-photo-review', JSON.stringify(reviewChoices));
+  localStorage.setItem('dyeslo-photo-review-v2', JSON.stringify(reviewChoices));
 }
 
 document.querySelectorAll('.image-choice').forEach((button) => {
