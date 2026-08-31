@@ -19,6 +19,13 @@ document.querySelectorAll('.product-image').forEach((image) => {
 
 const menuToggle = document.querySelector('.menu-toggle');
 const siteHeader = document.querySelector('.site-header');
+const mainNav = document.querySelector('.desktop-nav');
+if (mainNav && !mainNav.querySelector('a[href="locations.html"]')) {
+  const findUsLink = document.createElement('a');
+  findUsLink.href = 'locations.html';
+  findUsLink.textContent = 'Find us';
+  mainNav.insertBefore(findUsLink, mainNav.children[1] || null);
+}
 menuToggle?.setAttribute('aria-expanded', 'false');
 menuToggle?.addEventListener('click', () => {
   const open = siteHeader.classList.toggle('menu-open');
