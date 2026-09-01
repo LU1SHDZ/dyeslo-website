@@ -8,7 +8,7 @@ from threading import Thread
 PROJECT_ROOT = Path(__file__).resolve().parent
 HOSTS = ("127.0.0.1", "192.168.1.20")
 PORT = 4173
-PREVIEW_VERSION = "9fac6eb"
+PREVIEW_VERSION = "0e4f3e8"
 
 
 class PreviewHandler(SimpleHTTPRequestHandler):
